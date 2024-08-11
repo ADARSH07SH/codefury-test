@@ -107,7 +107,7 @@
 
             function fetchWeatherData(lat, lon) {
                 const apiKey = '69f96ff2ab7945259dc10131241108';
-                const apiUrl = `http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${lat},${lon}&alerts=yes`;
+                const apiUrl = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${lat},${lon}&alerts=yes`;
 
                 fetch(apiUrl)
                     .then(response => response.json())
