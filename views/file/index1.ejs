@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Alerts</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #36BA98, #E76F51);
+            color: #20262C;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        h1 {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        #map {
+            height: 400px;
+            width: 90%;
+            max-width: 600px;
+            margin: 20px auto;
+        }
+
+        #weather-info {
+            margin: 20px auto;
+            width: 90%;
+            max-width: 600px;
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.3);
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .alert {
+            padding: 10px;
+            margin: 10px 0;
+            background-color: #f8d7da;
+            color: #721c24;
+            border-radius: 5px;
+        }
+
+        .no-alerts {
+            padding: 10px;
+            background-color: #3fff63;
+            color: black;
+            border-radius: 5px;
+        }
+
+        .name {
+            background-color: rgba(255, 255, 255, 0.3);
+            border-radius: 5px;
+            padding: 3px;
+        }
+
+        .weatheralwer1 {
+            background-color: rgba(255, 0, 0, 0.4);
+            color: white;
+            border-radius: 5px;
+            padding: 3px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1 class="weatheralwer1">Weather Alerts</h1>
+    <h2 class="name">YOUR ALERT</h2>
+    <div id="map"></div>
+    <div id="weather-info"></div>
+
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(success, error);
+            } else {
+                alert('Geolocation is not supported by your browser.');
+            }
+
+            function success(position) {
+                const latitude = position.coords.latitude;
+                const longitude = position.coords.longitude;
+                displayMap(latitude, longitude);
+                fetchWeatherData(latitude, longitude);
+            }
+
+            function error() {
+                alert('Unable to retrieve your location.');
+            }
+
+            function displayMap(lat, lon) {
+                const map = L.map('map').setView([lat, lon], 5);
+
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '&copy; OpenStreetMap contributors'
+                }).addTo(map);
+
+                L.marker([lat, lon]).addTo(map).bindPopup('Your Location').openPopup();
+            }
+
+            function fetchWeatherData(lat, lon) {
+                const apiKey = '69f96ff2ab7945259dc10131241108';
+                const apiUrl = `http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${lat},${lon}&alerts=yes`;
+
+                fetch(apiUrl)
+                    .then(response => response.json())
+                    .then(data => {
+                        displayWeatherData(data);
+                    })
+                    .catch(error => console.error('Error fetching weather data:', error));
+            }
+
+            function displayWeatherData(data) {
+                const weatherInfoDiv = document.getElementById('weather-info');
+                weatherInfoDiv.innerHTML = `
+                    <h2>Current Weather</h2>
+                    <p><strong>Location:</strong> ${data.location.name}, ${data.location.region}, ${data.location.country}</p>
+                    <p><strong>Temperature:</strong> ${data.current.temp_c} °C</p>
+                    <p><strong>Condition:</strong> ${data.current.condition.text}</p>
+                `;
+
+                if (data.alerts && data.alerts.alert.length > 0) {
+                    data.alerts.alert.forEach(alert => {
+                        const alertDiv = document.createElement('div');
+                        alertDiv.className = 'alert';
+                        alertDiv.innerHTML = `
+                            <strong>Alert:</strong> ${alert.headline}<br>
+                            <strong>Description:</strong> ${alert.desc}<br>
+                            <strong>Instruction:</strong> ${alert.instruction}
+                        `;
+                        weatherInfoDiv.appendChild(alertDiv);
+                    });
+                } else {
+                    const noAlertsDiv = document.createElement('div');
+                    noAlertsDiv.className = 'no-alerts';
+                    noAlertsDiv.innerHTML = `<p>No weather alerts at this time.</p>`;
+                    weatherInfoDiv.appendChild(noAlertsDiv);
+                }
+            }
+        });
+    </script>
+</body>
+</html>

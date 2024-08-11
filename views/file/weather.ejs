@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Location with Weather Forecast and Disasters</title>
+    <style>
+        #map {
+            height: 100vh;
+            width: 100%;
+            position: relative;
+        }
+        #weather-info {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: white;
+            padding: 10px;
+            border: 1px solid #ddd;
+            z-index: 1000;
+        }
+        #alerts-info {
+            position: absolute;
+            top: 60px;
+            left: 20px;
+            background: white;
+            padding: 10px;
+            border: 1px solid #ddd;
+            z-index: 1000;
+            border-radius: 5px;
+            color: #20262C;
+        }
+        .no-alert {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        .alert-present {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+    </style>
+</head>
+<body>
+    <div id="weather-info">Weather: Not available</div>
+    <div id="alerts-info">No weather alerts at this time.</div>
+    <div id="map"></div>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDC_hBJuMoL2kLgIhgMg2e95lgbaSz_JSo"></script>
+    <script>
+        async function initMap() {
+            const map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 2,
+                center: { lat: 20.5937, lng: 78.9629 }
+            });
+
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(async (position) => {
+                    const lat = position.coords.latitude;
+                    const lng = position.coords.longitude;
+
+                    map.setCenter({ lat, lng });
+
+                    const marker = new google.maps.Marker({
+                        position: { lat, lng },
+                        map: map,
+                        title: 'Your Location'
+                    });
+
+                    const weatherResponse = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&appid=952325c9806064c2a3c50daacf131bc9&units=metric`);
+                    const weatherData = await weatherResponse.json();
+
+                    const temperature = weatherData.main.temp;
+                    const condition = weatherData.weather[0].description;
+
+                    document.getElementById('weather-info').innerText = `Temperature: ${temperature}°C, Condition: ${condition}`;
+
+                    const infowindow = new google.maps.InfoWindow({
+                        content: `<div><strong>Temperature:</strong> ${temperature}°C<br><strong>Condition:</strong> ${condition}</div>`
+                    });
+
+                    marker.addListener('click', () => {
+                        infowindow.open(map, marker);
+                    });
+
+                    const disasterResponse = await fetch('https://eonet.gsfc.nasa.gov/api/v3/events');
+                    const disasterData = await disasterResponse.json();
+
+                    let hasAlerts = false;
+                    disasterData.events.forEach(event => {
+                        if (event.geometry && event.geometry.length > 0) {
+                            const location = event.geometry[0];
+                            const position = getCenter(location);
+
+                            if (position) {
+                                const disasterMarker = new google.maps.Marker({
+                                    position: { lat: position[1], lng: position[0] },
+                                    map: map,
+                                    title: event.title
+                                });
+
+                                const disasterInfoWindow = new google.maps.InfoWindow({
+                                    content: `<div><strong>${event.title}</strong><br>${event.description || ''}</div>`
+                                });
+
+                                disasterMarker.addListener('click', () => {
+                                    disasterInfoWindow.open(map, disasterMarker);
+                                });
+
+                                hasAlerts = true;
+                            }
+                        }
+                    });
+
+                    const alertsInfoDiv = document.getElementById('alerts-info');
+                    if (hasAlerts) {
+                        alertsInfoDiv.className = 'alert-present';
+                        alertsInfoDiv.innerHTML = '<strong>Weather Alerts:</strong> There are active alerts in your area.';
+                    } else {
+                        alertsInfoDiv.className = 'no-alert';
+                        alertsInfoDiv.innerHTML = 'No weather alerts at this time.';
+                    }
+
+                }, error => {
+                    console.error('Error getting location:', error);
+                    document.getElementById('weather-info').innerText = 'Weather: Unable to retrieve location';
+                });
+            } else {
+                console.error('Geolocation is not supported by this browser.');
+                document.getElementById('weather-info').innerText = 'Weather: Geolocation not supported';
+            }
+        }
+
+        function getCenter(geojson) {
+            if (geojson.type === "Point") {
+                return geojson.coordinates;
+            } else if (geojson.type === "Polygon") {
+                const coordinates = geojson.coordinates[0];
+                let minLat = coordinates[0][1], maxLat = coordinates[0][1];
+                let minLng = coordinates[0][0], maxLng = coordinates[0][0];
+
+                coordinates.forEach(coord => {
+                    minLat = Math.min(minLat, coord[1]);
+                    maxLat = Math.max(maxLat, coord[1]);
+                    minLng = Math.min(minLng, coord[0]);
+                    maxLng = Math.max(maxLng, coord[0]);
+                });
+
+                const centerLat = (minLat + maxLat) / 2;
+                const centerLng = (minLng + maxLng) / 2;
+
+                return [centerLng, centerLat];
+            }
+        }
+
+        window.onload = initMap;
+    </script>
+</body>
+</html>

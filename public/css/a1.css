@@ -1,0 +1,342 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: Outfit, sans-serif;
+    
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+     background: linear-gradient(135deg, #191645, #43c6ac);
+    
+    
+    
+}
+::-webkit-scrollbar {
+    display: none;
+}
+
+.container {
+    flex: 1;
+}
+
+.f_info {
+    display: flex;
+    align-items: space-evenly;
+    justify-content: center;
+    flex-wrap: wrap;
+    height: 5rem;
+    background:#191645;
+    color: #EEEEEE; 
+    text-align: center;
+    padding: 0px !important;
+}
+
+.f_infosocial i {
+    padding: 0rem 0.4rem 0rem;
+}
+.f_infosocial {
+    width: 100%;
+    font-size: 1.5rem;
+    vertical-align: middle;
+}
+
+
+.f_infolinks {
+    width: 100%;
+    vertical-align: middle;
+}
+
+.f_infolinks a {
+    text-decoration: none;
+    color: #508C9B; /* Link color */
+}
+
+.f_infolinks a:hover {
+    text-decoration: underline;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: white; /* Navbar background color */
+    padding: 10px 20px;
+    color: #EEEEEE; /* Navbar text color */
+    
+}
+
+.navbar-opacity-low {
+    opacity: 0.9 !important; /* Adjust the opacity value as needed */
+}
+
+.nav-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    
+    
+}
+.container-fluid{
+    background-color: white;
+    
+    
+}
+.nav-logo img {
+    width: 100px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 20px;
+    list-style: none;
+}
+
+.nav-links li a {
+    color: #EEEEEE; /* Link color */
+    font-weight: 500;
+    font-size: 15px;
+}
+
+.nav-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.btn {
+    background-color: #508C9B; /* Button background color */
+    color: #EEEEEE; /* Button text color */
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.btn:hover {
+    background-color: #134B70; /* Button hover color */
+}
+
+.hero {
+    
+    background: linear-gradient(135deg, #36BA98, #E76F51);
+    text-align: center;
+    padding: 50px 20px;
+    position: relative; /* Positioning context for absolute children */
+    overflow: hidden; /* Prevents overflow from absolute children */
+    border-radius: 10px;
+    margin-top: 10px !important;
+    margin-bottom: 10px;
+}
+
+.hero img {
+    width: 100%;
+    height: auto; /* Ensures the image maintains its aspect ratio */
+    max-height: 300px; /* Set a maximum height for the hero image */
+    object-fit: cover; /* Ensures the image covers the area without distortion */
+}
+
+.resource-category img {
+    width: 100%;
+    height: 150px; /* Set a fixed height for resource images */
+    object-fit: cover; /* Ensures the image covers the area without distortion */
+    border-radius: 8px; /* Maintain the border-radius for aesthetics */
+}
+
+.hero h1 {
+    font-size: 36px;
+    margin-bottom: 10px;
+    color: #201E43; /* Hero title color */
+}
+
+.hero p {
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: #201E43; /* Hero paragraph color */
+}
+
+.cta-buttons {
+    margin-top: 20px;
+}
+
+.cta-buttons .btn {
+    margin: 0 10px;
+}
+
+.cta-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+}
+
+.cta-sosbutton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: red; /* SOS button background color */
+    color: black; /* SOS button text color */
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    font-size: 20px;    
+    font-weight: bold;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+    margin-top: 50px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
+    
+}
+
+.cta-sosbutton:hover {
+    background-color: #134B70; /* SOS button hover color */
+}
+
+.cta-sosbutton:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px #fff;
+}
+
+
+
+.cta-container a{
+    text-decoration: none;
+}
+
+.cta-buttons .btn {
+  background-color: red;
+  color: black;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  text-align: center;
+  display: inline-block;
+  font-weight: bold;
+}
+
+.cta-buttons .btn:hover {
+  background-color: darkred;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#scholarsync {
+    height: 50px;
+    width: 150px;
+    border-radius: 15px;
+    margin-top: 30px;
+    margin-left: 345px;
+}
+
+
+
+#list {
+    color: white;
+    position: absolute;
+    left: 700px;
+    font-family: 'Cormorant Upright', serif;
+    top: 60px;
+    z-index: 3;
+    display: inline-block;
+    font-size: 15px;
+}
+
+a {
+    padding-right: 25px;
+    color: inherit;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.donation-card {
+    width: 300px;
+    height: 450px;
+    border: 5px solid #4979D6;
+    border-radius: 25px;
+    padding: 15px;
+    margin: 20px;
+    background-color: rgba(225, 225, 225, 0.8);
+    font-size: 14px;
+    position: relative;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease-in-out;
+}
+
+.donation-card:hover {
+    transform: scale(1.05);
+}
+
+.donation-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 25px;
+}
+
+.donation-card h3 {
+    color: #d56f3e;
+}
+
+.donation-card p {
+    color: black;
+}
+
+.donation-button {
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 40px;
+    width: 140px;
+    background-color: #E6DF31;
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+    color: #333;
+    cursor: pointer;
+}
+
+.donation-button:hover {
+    background-color: #d6c531;
+}
+
+.donation-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    justify-content: center;
+}
+
+

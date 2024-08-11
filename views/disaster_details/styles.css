@@ -1,0 +1,236 @@
+/* styles_dis.css */
+
+/* Global Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f4f4f4;
+}
+
+/* Header and Navigation */
+header {
+    background: linear-gradient(to right, #004d40, #00796b);
+    color: #fff;
+    padding: 1rem;
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: background 0.3s, color 0.3s;
+}
+
+nav a:hover {
+    background: rgba(255, 255, 255, 0.2);
+    color: #00796b;
+}
+
+/* Hero Section */
+.hero {
+    background: linear-gradient(to right, #00796b, #004d40);
+    color: #fff;
+    padding: 2rem 1rem;
+    text-align: center;
+    border-bottom: 3px solid #004d40;
+}
+
+.hero h1 {
+    margin: 0;
+    font-size: 3rem;
+}
+
+.hero p {
+    font-size: 1.5rem;
+}
+
+/* Sections */
+section {
+    padding: 1rem;
+    margin: 0.5rem auto;
+    background: #fff;
+    border-radius: 5px;
+    max-width: 1200px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+section h2 {
+    font-size: 2rem;
+    color: #004d40;
+    border-bottom: 3px solid #00796b;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.info-item {
+    margin-bottom: 1rem;
+}
+
+.info-item h3 {
+    font-size: 1.6rem;
+    color: #00796b;
+}
+
+ul {
+    list-style-type: disc;
+    padding-left: 2rem;
+}
+
+
+footer {
+    background: linear-gradient(to right, #004d40, #00796b);
+    color: #fff;
+    padding: 0rem !important;
+    text-align: center;
+}
+
+footer .quick-links, 
+footer .social-media, 
+footer .contact-info, 
+footer .legal {
+    margin-bottom: 1rem;
+}
+
+footer a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 0.5rem;
+    transition: color 0.3s;
+}
+
+footer a:hover {
+    color: #e0f2f1;
+}
+
+footer .contact-info p {
+    margin: 0.5rem 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+    }
+
+    nav a {
+        margin: 0.5rem 0;
+    }
+
+    .hero h1 {
+        font-size: 2rem;
+    }
+
+    .hero p {
+        font-size: 1rem;
+    }
+
+    section {
+        padding: 1rem;
+    }
+}
+
+/* Video Container */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+}
+
+.video-container {
+    width: 90%; /* Adjust width to fit better */
+    max-width: 560px; /* Set a maximum width */
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    height: 20;
+    overflow: hidden;
+    background: #000;
+    border-radius: 8px; /* Optional: rounded corners */
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%; /* Full height to fit the container */
+}
+
+
+
+
+
+
+
+
+.donation-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    justify-items: center;
+}
+
+.donation-card {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    border: 5px solid #4979D6;
+    border-radius: 25px;
+    padding: 10px;
+    background-color: rgba(225, 225, 225, 0.8);
+    font-size: 12px;
+    position: relative;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease-in-out;
+}
+
+.donation-card:hover {
+    transform: scale(1.05);
+}
+
+.donation-card img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 25px;
+}
+
+.donation-card h3 {
+    color: #d56f3e;
+}
+
+.donation-card p {
+    color: #9d6f24;
+}
+
+.donation-button {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 40px;
+    width: 120px;
+    background-color: #E6DF31;
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+    color: #333;
+    cursor: pointer;
+}
+
+.donation-button:hover {
+    background-color: #d6c531;
+}
