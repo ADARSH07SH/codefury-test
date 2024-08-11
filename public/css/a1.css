@@ -190,7 +190,7 @@ nav {
     width: 150px;
     height: 150px;
     border-radius: 50%;
-    font-size: 20px;    
+    font-size: 20px;
     font-weight: bold;
     text-align: center;
     border: none;
@@ -198,11 +198,24 @@ nav {
     margin-top: 50px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     transition: background-color 0.3s ease;
-    
+    line-height: 150px; 
+    padding: 0; 
+}
+
+.cta-sosbutton a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    width: 100%;
+    height: 100%;
+    color: inherit; 
 }
 
 .cta-sosbutton:hover {
-    background-color: #134B70; /* SOS button hover color */
+    background-color: black; /* SOS button hover color */
+    text-decoration: none;
+    color: red;
 }
 
 .cta-sosbutton:focus {
@@ -214,6 +227,9 @@ nav {
 
 .cta-container a{
     text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .cta-buttons .btn {
