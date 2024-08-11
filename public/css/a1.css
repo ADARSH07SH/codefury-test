@@ -185,8 +185,8 @@ nav {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: red; /* SOS button background color */
-    color: black; /* SOS button text color */
+    background-color: red; 
+    color: black; 
     width: 150px;
     height: 150px;
     border-radius: 50%;
