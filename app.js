@@ -7,7 +7,7 @@ const bcrypt = require("bcrypt");
 const ejsMate = require("ejs-mate");
 
 const app = express();
-const port = 8000; // You can set this to any desired port
+const port = 8000; 
 
 const connection = mysql.createConnection({
   host: "mysql-2e295e01-noob-8b4e.k.aivencloud.com",
